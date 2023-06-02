@@ -1,0 +1,137 @@
+{{> navbar}}
+<div class="wrapper-md">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
+                <div class="text-center mb-3">
+                    <h5 class="title-text">Account Profile</h5>
+                </div>
+                <div class="card rounded-card border-0 mb-3">
+                    <div class="card-body">
+                        {{> flashMessage}}
+                        <form action="/profile" method="post" class="mb-0">
+                            <input type="hidden" name="_method" value="PUT">
+
+                            <div class="mb-4">
+                                <label for="firstname" class="small text-muted">Firstname</label>
+                                <input type="text" class="form-control" name="firstname" placeholder="First name"
+                                    id="firstname" value="{{user.firstname}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="lastname" class="small text-muted">Lastname</label>
+                                <input type="text" class="form-control" name="lastname" placeholder="Last name"
+                                    id="lastname" value="{{user.lastname}}">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="email" class="small text-muted">Email</label>
+                                <input type="email" class="form-control" placeholder="example@email.com" id="email"
+                                    readonly value="{{user.email}}">
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-full">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-full" type="button" data-toggle="modal" data-target="#changePasswordModal">
+                        Change Password
+                    </button>
+
+                    <button class="btn btn-full" type="button" data-toggle="modal" data-target="#changeSecretsModal">
+                        Change secrets
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Reset password modal --}}
+<div class="modal fade" id="changePasswordModal" data-backdrop="static">
+    <div class="modal-dialog modal-sm rounded-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Change Password
+                </h5>
+                <button class="close" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="/changePassword" method="post">
+                    <div class="mb-4">
+                        <input type="password" class="form-control" placeholder="Old Password" name="oldPassword">
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" class="form-control" placeholder="New Password" name="newPassword">
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="password" class="form-control" placeholder="Confirm Password"
+                            name="confirmPassword">
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-full">
+                            Confirm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Reset password modal --}}
+
+{{!-- Change secrets modal --}}
+<div class="modal fade" id="changeSecretsModal">
+    <div class="modal-dialog modal-sm rounded-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change secret</h5>
+                <a href="javascript: void(0)" class="close" data-dismiss="modal">
+                    &times;
+                </a>
+            </div>
+            <div class="modal-body">
+                <form action="/updateSecret" method="post" class="m-0">
+                    <div class="mb-4">
+                        <select name="question"
+                            class="form-control {{#if (equals error.path 'question')}}border-danger{{/if}}" {{#if
+                            (equals error.path 'question' )}}data-title="Select a secret question" {{/if}}
+                            data-toggle="tooltip">
+                            <option value="">Select secret Question</option>
+                            {{#each questions as |question|}}
+                            <option value="{{question}}" {{#if (equals ../user.secret.question question)}}
+                                selected="true" {{/if}}>
+                                {{question}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <textarea name="answer" rows="1" class="form-control" placeholder="Secret Answer"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-full">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Change secrets modal --}}
+{{> footer}}

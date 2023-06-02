@@ -1,0 +1,67 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+                <div class="card rounded-card login-card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <!-- Logo -->
+                            <a href="/" class="link">
+                                <div class="d-flex justify-content-center align-tems-center mb-3 logo-pane">
+                                    <img src="imgs/logo.png" alt="Logo" class="logo mr-1" />
+                                    SSMSA
+                                </div>
+                            </a>
+                            <!-- Logo -->
+                        </div>
+
+                        {{#if isStateValid}}
+                        <div class="text-center mb-4">
+                            <p class="text-muted">
+                                Verify your account email by entering the 6 digit code we sent to {{email}}
+                            </p>
+                        </div>
+                        {{> flashMessage}}
+                        <form method="post" class="mb-4">
+                            <input type="hidden" name="client" value="{{client}}">
+                            <input type="hidden" name="state" value="{{state}}">
+
+                            <div class="d-flex justify-content-center code-digit-pane mb-4">
+                                <input type="text" class="form-control" name="codes" maxlength="1" tabindex="1">
+                                <input type="text" class="form-control" name="codes" maxlength="1" tabindex="1">
+                                <input type="text" class="form-control" name="codes" maxlength="1" tabindex="1">
+                                <input type="text" class="form-control" name="codes" maxlength="1" tabindex="1">
+                                <input type="text" class="form-control" name="codes" maxlength="1" tabindex="1">
+                                <input type="text" class="form-control" name="codes" maxlength="1" tabindex="1">
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-full">
+                                    Verify
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="text-center">
+                            <form action="/resend/verificationCode" method="post" class="m-0">
+                                <input type="hidden" name="client" value="{{client}}">
+                                <input type="hidden" value="{{data.email}}" name="email">
+                                <div class="text-center">
+                                    <button class="btn btn-light btn-sm">Resend code</button>
+                                </div>
+                            </form>
+                        </div>
+                        {{else}}
+                        <div class="text-center py-3">
+                            <p class="text-muted">Sorry, either this link is broken or your session has expired</p>
+                            <a href="/" class="btn btn-full">
+                                Go back home
+                            </a>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

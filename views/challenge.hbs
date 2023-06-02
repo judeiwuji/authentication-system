@@ -1,0 +1,71 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
+                <div class="card rounded-card">
+                    <div class="card-body">
+                        <div class="text-center mb-2">
+                            <!-- Logo -->
+                            <div class="d-flex justify-content-center align-tems-center mb-3 logo-pane">
+                                <img src="/imgs/logo.png" alt="Logo" class="logo mr-1" />
+                                SSMSA
+                            </div>
+                            <!-- Logo -->
+                        </div>
+                        {{#if isValidSession}}
+                        <div class="text-center mb-4">
+                            <p class="text-muted m-1">Identity Challenge</p>
+                            <p class="small text-muted">
+                                In order to protect your account from hackers, we want to know if is really you.
+                            </p>
+                        </div>
+                        {{> flashMessage}}
+
+                        <form method="post">
+                            <input type="hidden" name="state" value="{{state}}">
+                            <input type="hidden" name="client" value="{{client}}">
+                            <div class="mb-4">
+                                <select name="question" class="form-control">
+                                    <option value="">Select secret Question</option>
+                                    {{#each questions as |question|}}
+                                    <option value="{{question}}">
+                                        {{question}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <input type="text" class="form-control" placeholder="Secret Answer" name="answer"
+                                    value="{{data.answer}}">
+                            </div>
+
+
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <a href="/login">
+                                    Login
+                                </a>
+
+                                <button type="submit" class="btn btn-full">
+                                    Next
+                                </button>
+                            </div>
+                        </form>
+                        {{else}}
+                        <div class="text-center">
+                            <p class="small text-muted">
+                                This link might be broken or your session has expired. Click on login, to restart the
+                                process.
+                            </p>
+
+                            <a href="/login" class="btn btn-full">
+                                Login
+                            </a>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

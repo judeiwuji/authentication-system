@@ -1,0 +1,89 @@
+{{> navbar}}
+<div class="wrapper-md">
+    <div class="container py-3">
+        <div class="mb-5">
+            <h5 class="title-text">Devices</h5>
+            <div class="card rounded-card border-0">
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table class="table table-hover m-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Platform</th>
+                                    <th>OS Version</th>
+                                    <th>Type</th>
+                                    <th>Last Login</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each devices as |device|}}
+                                <tr>
+                                    <td>{{math @index "+" 1}}.</td>
+                                    <td>{{device.data.client.name}}</td>
+                                    <td>{{device.data.os.name}}</td>
+                                    <td>{{device.data.os.version}}</td>
+                                    <td>{{device.data.device.type}}</td>
+                                    <td>{{dateFormat device.updatedAt 'Do MMMM YYYY'}}</td>
+                                    <td>
+                                        <form action="/users/devices/{{device.id}}" method="post"
+                                            class="form-inline m-0">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h5 class="title-text">Connected Apps</h5>
+            <div class="card rounded-card border-0">
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Connection Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each apps as |app|}}
+                                <tr>
+                                    <td>{{math @index "+" 1}}.</td>
+                                    <td>{{app.client.name}}</td>
+                                    <td>{{dateFormat app.createdAt 'Do MMMM YYYY'}}</td>
+                                    <td>
+                                        <form action="/users/apps/{{app.id}}" method="post" class="form-inline m-0">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> footer}}

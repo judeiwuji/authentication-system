@@ -1,0 +1,299 @@
+body {
+  text-rendering: optimizeLegibility;
+  font-size: 16px;
+  font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #ececec;
+  scroll-behavior: smooth;
+}
+
+/* logo */
+.logo {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.logo-sm {
+  width: 0.8em;
+  height: 0.8em;
+}
+/* logo */
+
+/* banner */
+.banner {
+  padding: 10rem 5rem;
+  background-color: #f50057;
+  background-image: url(../imgs/account_login.svg);
+  background-repeat: no-repeat;
+  background-position: 80%;
+  background-size: 20em;
+  border-bottom-right-radius: 15rem;
+}
+/* banner */
+
+/* hero-textbox */
+.hero-textbox {
+  width: 50%;
+  color: #ffffff;
+}
+
+.hero-textbox h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.hero-textbox p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+/* hero-textbox */
+
+/* Features */
+.features-section > div {
+  padding: 4.75rem 0;
+}
+
+.features-section > div:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.features-section .row {
+  align-items: center;
+}
+
+.features-section img {
+  width: 25rem;
+}
+
+.features-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.features-section p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4e4e4e;
+}
+/* Features */
+
+/* wrapper */
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrapper-md {
+  width: 100%;
+  min-height: 86.2vh;
+}
+/* wrapper */
+
+/* rounded-card */
+.rounded-card {
+  border-radius: 10px;
+}
+
+.rounded-card .card-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.rounded-card .card-footer {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+/* rounded-card */
+
+/* btn */
+.btn-full {
+  background-color: #f50057;
+  color: #ffffff;
+}
+
+.btn-full:hover {
+  color: #ffffff;
+}
+/* btn */
+
+/* signup-card */
+.signup-card {
+  background-image: url(../imgs/account_login.svg);
+  background-repeat: no-repeat;
+  background-position: 90%;
+  background-size: 10em;
+  border: 0;
+}
+
+.signup-card .card-body {
+  padding: 3rem;
+}
+
+.signup-card h4 {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.signup-form-wrapper {
+  width: 65%;
+}
+/* signup-card */
+
+/* logo-pane */
+.logo-pane {
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+a.link {
+  text-decoration: none;
+  color: #4e4e4e;
+}
+
+a.link:hover {
+  text-decoration: none;
+}
+/* logo-pane */
+
+/* login-card */
+.login-card {
+  padding: 2.5rem;
+}
+/* login-card */
+
+/* rounded-modal */
+.rounded-modal .modal-content {
+  border-radius: 10px;
+}
+/* rounded-modal */
+
+/* app-card */
+.app-card {
+  border: 0;
+  transition: all ease-in 0.3s;
+  box-shadow: 0px 1px 0.2rem #888888;
+  text-decoration: none;
+  color: #4e4e4e;
+}
+
+.app-card .card-body {
+  height: 13em;
+  cursor: pointer;
+}
+
+.app-card:hover {
+  background-color: #fafafa;
+  text-decoration: none;
+  color: #4e4e4e;
+}
+/* app-card */
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+/* code-digit-pane */
+.code-digit-pane > input {
+  width: 2em;
+  text-align: center;
+  margin: 0 0.35rem;
+  padding: 0.5rem 0.1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+/* code-digit-pane */
+
+/* title-text */
+.title-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4e4e4e;
+}
+/* title-text */
+
+.table-wrapper {
+  overflow: auto;
+  max-width: 100%;
+}
+
+.table-wrapper table {
+  min-width: 1000px;
+}
+
+.link {
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 991px) {
+  .banner {
+    padding: 5rem;
+    background-size: 16rem;
+  }
+
+  .hero-textbox {
+    width: 60%;
+  }
+
+  .features-section img {
+    width: 18rem;
+  }
+
+  .features-section > div {
+    padding: 3rem 0;
+  }
+}
+
+@media screen and (max-width: 857px) {
+  .banner {
+    background-position: 83%;
+  }
+
+  .hero-textbox h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banner {
+    background-image: none;
+    padding: 2rem;
+    border-bottom-right-radius: 8rem;
+  }
+
+  .hero-textbox {
+    width: 100%;
+  }
+
+  .features-section .row > div {
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .signup-card {
+    background-image: none;
+  }
+
+  .signup-form-wrapper {
+    width: 100%;
+  }
+
+  .signup-card .card-body {
+    padding: 2rem;
+  }
+
+  .login-card {
+    padding: 0rem;
+  }
+}

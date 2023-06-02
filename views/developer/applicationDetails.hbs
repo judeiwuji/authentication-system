@@ -1,0 +1,144 @@
+{{> navbar}}
+<div class="wrapper-md">
+    <div class="container py-5">
+        <div class="card rounded-card bg-transparent mb-5">
+            <div class="card-body">
+                <div class="mb-3">
+                    <h5>App Credentials</h5>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-12 col-md-6 col-lg-3 mb-2">
+                        <div class="card rounded-card border-0">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h5>App Name</h5>
+                                        <p class="text-muted small m-0">
+                                            {{app.name}}
+                                        </p>
+                                    </div>
+                                    <button class="btn shadow-none bg-transparent copyToClipboard"
+                                        data-text="{{app.name}}">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-5 mb-2">
+                        <div class="card rounded-card border-0">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h5>Client ID</h5>
+                                        <p class="text-muted small m-0">
+                                            {{app.id}}
+                                        </p>
+                                    </div>
+                                    <button class="btn shadown-none bg-transparent copyToClipboard"
+                                        data-text="{{app.id}}">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-2">
+                        <div class="card rounded-card border-0">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h5>Client Secret</h5>
+                                        <p class="text-muted small m-0">
+                                            {{app.secret}}
+                                        </p>
+                                    </div>
+                                    <button class="btn shadown-none bg-transparent copyToClipboard"
+                                        data-text="{{app.secret}}">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card rounded-card border-0">
+                            <div class="card-body">
+                                <h5>Redirect URL</h5>
+                                <form action="/client/apps/{{app.id}}" method="post" class="m-0">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <div class="d-flex align-items-center">
+                                        <input value="{{app.redirectURL}}" class="form-control mr-2" name="redirectURL">
+                                        <button class="btn btn-full">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <form action="/client/apps/{{app.id}}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger">
+                    Delete App
+                </button>
+            </form>
+
+            <div>
+                <button class="btn btn-full" data-toggle="modal" data-target="#howToInstallApp">Install</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Install instruction --}}
+<div class="modal fade" id="howToInstallApp">
+    <div class="modal-dialog rounded-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    How to install
+                </h5>
+                <a href="javascript: void(0)" class="close" data-dismiss="modal">
+                    &times;
+                </a>
+            </div>
+
+            <div class="modal-body">
+                <ul>
+                    <li>
+                        Copy the code below and paste it in your website login page
+                        <div class="card rounded-card bg-light my-3">
+                            <div class="card-body">
+                                {{loginScript}}
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        Create this <code>{{app.redirectURL}}</code> route in your website
+                    </li>
+                    <li>
+                        On successful login you will receive an
+                        authorization code In this <code>{{app.redirectURL}}</code> route.
+                    </li>
+                    <li>
+                        Use the authorization code to request for the user public profile at this endpoint
+                        <code>{{domain}}/users/public/profile</code>
+                    </li>
+                    <li>Ready...Go!</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Install instruction --}}
+{{>footer}}

@@ -1,0 +1,59 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
+                <div class="card rounded-card login-card">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <!-- Logo -->
+                            <a href="/" class="link">
+                                <div class="d-flex justify-content-center align-tems-center mb-3 logo-pane">
+                                    <img src="/imgs/logo.png" alt="Logo" class="logo mr-1" />
+                                    SSMSA
+                                </div>
+                            </a>
+                            <!-- Logo -->
+                            <p>Use your {{appName}}</p>
+                        </div>
+
+                        {{> flashMessage}}
+
+                        <form method="post">
+                            <div class="mb-4">
+                                <input type="email" class="form-control" placeholder="Email" name="email">
+                            </div>
+
+                            <div class="mb-4">
+                                <input type="password" class="form-control" placeholder="Password" name="password">
+                                <div class="mt-2">
+                                    <a href="/login/auth/recoverAccount/identity">
+                                        Forgot your password?
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <label for="signupForm" class="link">
+                                    Create account
+                                </label>
+                                <button type="submit" class="btn btn-full">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+
+                        {{!-- Signup --}}
+                        <form action="/signup" class="d-none">
+                            {{#if client}}
+                            <input type="hidden" name="client" value="{{client}}">
+                            {{/if}}
+                            <button type="submit" class="link" id="signupForm">
+                                Create account
+                            </button>
+                        </form>
+                        {{!-- Signup --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

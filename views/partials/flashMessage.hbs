@@ -1,0 +1,25 @@
+{{#if info}}
+<div class="alert alert-primary">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="m-0">
+            {{info}}
+        </p>
+        <a href="javascript: void(0)" class="close" data-dismiss="alert">
+            &times;
+        </a>
+    </div>
+</div>
+{{/if}}
+
+{{#if error}}
+<div class="alert alert-danger">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="m-0">
+            {{error}}
+        </p>
+        <a href="javascript: void(0)" class="close" data-dismiss="alert">
+            &times;
+        </a>
+    </div>
+</div>
+{{/if}}

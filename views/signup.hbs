@@ -1,0 +1,178 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-10 mx-auto">
+                <div class="card rounded-card signup-card">
+                    <div class="card-body">
+                        <div class="signup-form-wrapper">
+                            <!-- Logo -->
+                            <a href="/" class="link">
+                                <div class="d-flex align-tems-center mb-3 logo-pane">
+                                    <img src="/imgs/logo.png" alt="Logo" class="logo mr-1" />
+                                    SSMSA
+                                </div>
+                            </a>
+                            <!-- Logo -->
+
+                            <!-- Title -->
+                            <div class="mb-4">
+                                <h4>Create your {{appName}} account</h4>
+                            </div>
+                            <!-- Title -->
+                            {{!-- Error Message --}}
+                            {{#if (equals error.code 'UserCreationFailed')}}
+                            <div class="alert alert-danger">
+                                {{error.message}}
+                            </div>
+                            {{/if}}
+                            {{!-- Error Message --}}
+                            <form action="/signup" method="post" class="mb-0">
+                                <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="client" value="{{client}}">
+
+                                <div class="row mb-4">
+                                    <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text"
+                                            class="form-control {{#if (equals error.path 'firstname')}}border-danger{{/if}}"
+                                            {{#if (equals error.path 'firstname' )}}data-title="Provide your firstname"
+                                            {{/if}} data-toggle="tooltip" data-tooltip-class="bg-danger"
+                                            name="firstname" placeholder="First name" id="firstname"
+                                            value="{{data.firstname}}">
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text"
+                                            class="form-control {{#if (equals error.path 'lastname')}}border-danger{{/if}}"
+                                            {{#if (equals error.path 'lastname' )}}data-title="Provide your lastname"
+                                            {{/if}} data-toggle="tooltip" name="lastname" placeholder="Last name"
+                                            id="lastname" value="{{data.lastname}}">
+
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <select name="question"
+                                        class="form-control {{#if (equals error.path 'question')}}border-danger{{/if}}"
+                                        {{#if (equals error.path 'question' )}}data-title="Select a secret question"
+                                        {{/if}} data-toggle="tooltip">
+                                        <option value="">Select secret Question</option>
+                                        {{#each questions as |question|}}
+                                        <option value="{{question}}" {{#if (equals ../data.question question)}}
+                                            selected="true" {{/if}}>
+                                            {{question}}
+                                        </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text"
+                                        class="form-control {{#if (equals error.path 'answer')}}border-danger{{/if}}"
+                                        {{#if (equals error.path 'answer' )}}data-title="Provide a secret answer"
+                                        {{/if}} data-toggle="tooltip" placeholder="Secret Answer" name="answer"
+                                        value="{{data.answer}}">
+                                </div>
+
+                                <div class="mb-4">
+                                    <input type="email"
+                                        class="form-control {{#if (equals error.path 'email')}}border-danger{{/if}}"
+                                        {{#if (equals error.path 'email' )}}data-title="{{error.message}}" {{/if}}
+                                        data-toggle="tooltip" placeholder="example@email.com" id="email" name="email"
+                                        value="{{data.email}}">
+                                </div>
+
+                                <div class="row mb-5">
+                                    <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+                                        <div class="input-group">
+                                            <input type="password"
+                                                class="form-control {{#if (equals error.path 'password')}}border-danger{{/if}}"
+                                                {{#if (equals error.path 'password'
+                                                )}}data-title="Provide your password" {{/if}} data-toggle="tooltip"
+                                                name="password" placeholder="Password" id="password">
+                                            {{!-- <span class="input-group-append">
+                                                <button class="btn btn-outline-secondary">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </button>
+                                            </span> --}}
+                                        </div>
+                                        <div class="card card-rounded bg-light d-none">
+                                            <div class="card-body">
+                                                <h6 class="text-muted small">Password requirements</h6>
+                                                <ul class="m-0 list-unstyled pwd-requirements">
+                                                    <li id="pwd_len">
+                                                        <i class="fas fa-check mr-1"></i>
+                                                        <i class="fas fa-times mr-1"></i>
+                                                        <span>It must have at least 8 characters</span>
+                                                    </li>
+                                                    <li id="pwd_upper">
+                                                        <i class="fas fa-check mr-1"></i>
+                                                        <i class="fas fa-times mr-1"></i>
+                                                        <span>It must have at least one uppercase character
+                                                            <span class="badge badge-dark">
+                                                                A-Z
+                                                            </span></span>
+                                                    </li>
+                                                    <li id="pwd_lower">
+                                                        <i class="fas fa-check mr-1"></i>
+                                                        <i class="fas fa-times mr-1"></i>
+                                                        <span>It must have at least one lowercase character
+                                                            <span class="badge badge-dark">
+                                                                a-z
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                    <li id="pwd_digit">
+                                                        <i class="fas fa-check mr-1"></i>
+                                                        <i class="fas fa-times mr-1"></i>
+                                                        <span>It must have at least one digit
+                                                            <span class="badge badge-dark">
+                                                                0-9
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                    <li id="pwd_special">
+                                                        <i class="fas fa-check mr-1"></i>
+                                                        <i class="fas fa-times mr-1"></i>
+                                                        <span>
+                                                            It must have at least one special character
+                                                            <span class="badge badge-dark">
+                                                                !@#$%^&*()
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="password"
+                                            class="form-control {{#if (equals error.path 'confirmPassword')}}border-danger{{/if}}"
+                                            {{#if (equals error.path 'confirmPassword' )}}data-title="Password mismatch"
+                                            {{/if}} data-toggle="tooltip" name="confirmPassword" placeholder="Confirm"
+                                            id="confirmPassword">
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                    <label for="loginForm" class="link mb-2">
+                                        Log in instead
+                                    </label>
+                                    <button type="submit" class="btn btn-full mb-2">
+                                        Create account
+                                    </button>
+                                </div>
+                            </form>
+
+                            {{!-- Login --}}
+                            <form action="/login" class="d-none">
+                                {{#if client}}
+                                <input type="hidden" name="client" value="{{client}}">
+                                {{/if}}
+                                <button type="submit" id="loginForm">
+                                    Log in instead
+                                </button>
+                            </form>
+                            {{!-- Login --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
+                <div class="card rounded-card border-0">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <!-- Logo -->
+                            <a href="/" class="link">
+                                <div class="d-flex justify-content-center align-tems-center mb-3 logo-pane">
+                                    <img src="/imgs/logo.png" alt="Logo" class="logo mr-1" />
+                                    SSMSA
+                                </div>
+                            </a>
+                            <!-- Logo -->
+                            <p>Use your SSMSA account</p>
+                        </div>
+
+                        {{#if error}}
+                        <div class="alert alert-danger">
+                            <div class="d-flex justify-content-between">
+                                <p class="m-0">
+                                    {{error}}
+                                </p>
+                                <a href="javascript: void(0)" class="close" data-dismiss="alert">
+                                    &times;
+                                </a>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <form action="/login" method="post">
+                            <div class="mb-4">
+                                <input type="email" class="form-control" placeholder="Email" name="email">
+                            </div>
+
+                            <div class="mb-4">
+                                <input type="password" class="form-control" placeholder="Password" name="password">
+                            </div>
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn btn-full">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <a href="/developer/signup">
+                                    Don't have an account? Signup
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
