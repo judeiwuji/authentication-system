@@ -13,7 +13,7 @@
                                 </div>
                             </a>
                             <!-- Logo -->
-                            <p class="text-muted">Use SSMSA in your web apps.</p>
+                            <p class="text-muted">Create participation website account</p>
                         </div>
 
                         {{#if (equals error.code 'DeveloperCreate')}}
@@ -22,7 +22,7 @@
                         </div>
                         {{/if}}
 
-                        <form action="/developer/signup" method="post" class="m-0">
+                        <form action="/website/signup" method="post" class="m-0">
                             <div class="row mb-4">
                                 <div class="col-12 col-sm-6 mb-3 mb-sm-0">
                                     <input type="text"
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="text-center">
-                                <a href="/developer/login">Already have an account? Login</a>
+                                <a href="/website/login">Already have an account? Login</a>
                             </div>
                         </form>
                     </div>

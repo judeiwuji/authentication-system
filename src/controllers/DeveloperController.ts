@@ -115,6 +115,6 @@ export default class DeveloperController {
     } catch (error: any) {
       req.flash('error', error.message);
     }
-    res.redirect('/developer/profile');
+    res.redirect('/website/profile');
   }
 }

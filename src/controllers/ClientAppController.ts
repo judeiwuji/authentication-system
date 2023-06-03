@@ -23,7 +23,7 @@ export default class ClientAppController {
       res.redirect(`/client/apps/${app.id}`);
     } catch (error: any) {
       req.flash('error', error.message);
-      res.redirect('/developer/dashboard?tab=createApp');
+      res.redirect('/website/dashboard?tab=createApp');
     }
   }
 
@@ -96,7 +96,7 @@ export default class ClientAppController {
         req.user?.developer as Developer
       );
       req.flash('info', 'App deleted');
-      res.redirect(`/developer/dashboard`);
+      res.redirect(`/website/dashboard`);
     } catch (error: any) {
       req.flash('error', error.message);
       res.redirect(`/client/apps/${id}`);

@@ -16,7 +16,7 @@ export default class UserController {
 
   async getDashboard(req: IRequest, res: Response) {
     if (req.user && req.user.developer) {
-      res.redirect('/developer/dashboard');
+      res.redirect('/website/dashboard');
     }
     const apps = await this.userService.getApps(req.user?.id as string);
     const devices = await this.userService.getDevices(req.user?.id as string);

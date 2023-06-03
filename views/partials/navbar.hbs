@@ -21,12 +21,12 @@
             {{#if isLoggedIn}}
             {{!-- Authenticated --}}
             {{#if isDeveloper}}
-            <li class="nav-item {{#if (equals path '/developer/dashboard')}}active{{/if}}">
-                <a class="nav-link" href="/developer/dashboard">Dashboard</a>
+            <li class="nav-item {{#if (equals path '/website/dashboard')}}active{{/if}}">
+                <a class="nav-link" href="/website/dashboard">Dashboard</a>
             </li>
 
-            <li class="nav-item {{#if (equals path '/developer/profile')}}active{{/if}}">
-                <a class="nav-link" href="/developer/profile">Profile</a>
+            <li class="nav-item {{#if (equals path '/website/profile')}}active{{/if}}">
+                <a class="nav-link" href="/website/profile">Profile</a>
             </li>
             {{else}}
             <li class="nav-item {{#if (equals path '/dashboard')}}active{{/if}}">
@@ -39,8 +39,8 @@
             {{/if}}
             {{!-- Authenticated --}}
             {{else}}
-            <li class="nav-item" {{#if (equals path 'developer/signup' )}}active{{/if}}>
-                <a class="nav-link" href="/developer/login">Developer</a>
+            <li class="nav-item" {{#if (equals path '/website/login' )}}active{{/if}}>
+                <a class="nav-link" href="/website/login">Participation Website</a>
             </li>
             <li class="nav-item" {{#if (equals path '/signup' )}}active{{/if}}>
                 <a class="nav-link" href="/signup">Signup</a>

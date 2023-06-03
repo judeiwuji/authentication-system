@@ -68,7 +68,7 @@ export default class VerificationController {
         });
         res.cookie('session', session.id);
         user.developer
-          ? res.redirect('/developer/dashboard')
+          ? res.redirect('/website/dashboard')
           : res.redirect('/dashboard');
       } else {
         req.flash('error', 'Invalid verification code');

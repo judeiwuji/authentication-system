@@ -115,7 +115,7 @@ export default class AuthController {
       req.flash('error', error.message);
     }
     req.user?.developer
-      ? res.redirect('/developer/profile')
+      ? res.redirect('/website/profile')
       : res.redirect('/profile');
   }
 
@@ -178,7 +178,7 @@ export default class AuthController {
         maxAge: 2.628e9,
       });
       user.developer
-        ? res.redirect('/developer/dashboard')
+        ? res.redirect('/website/dashboard')
         : res.redirect('/dashboard');
     } catch (error: any) {
       req.flash('error', error.message);
