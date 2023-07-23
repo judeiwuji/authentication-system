@@ -157,6 +157,7 @@ export default class AuthController {
           return;
         }
 
+        // Login from another app
         if (req.query.client) {
           res.redirect(
             `/login/auth/consent${toQueryParamString({
