@@ -1,23 +1,23 @@
-import User, { UserAttributes, UserCreationAttributes } from "../models/User";
-import { genSalt, hash } from "bcryptjs";
+import User, { UserAttributes, UserCreationAttributes } from '../models/User';
+import { genSalt, hash } from 'bcryptjs';
 import {
   UserAlreadyExistsError,
   UserCreateError,
   UserNotFoundError,
   UserSecretNotFoundError,
-} from "../models/errors/UserError";
+} from '../models/errors/UserError';
 import UserSecret, {
   UserSecretAttributes,
   UserSecretCreationAttributes,
-} from "../models/UserSecret";
-import DB from "../models/engine/DBStorage";
-import Developer from "../models/Developer";
-import UserApp from "../models/UserApp";
-import UserDevice from "../models/UserDevice";
-import DeviceDetector from "node-device-detector";
-import { ClientAppNotFoundError } from "../models/errors/ClientAppError";
-import ClientApp from "../models/ClientApp";
-import NotFoundError from "../models/errors/NotFoundError";
+} from '../models/UserSecret';
+import DB from '../models/engine/DBStorage';
+import ParticipatingWebsite from '../models/ParticipatingWebsite';
+import UserApp from '../models/UserApp';
+import UserDevice from '../models/UserDevice';
+import DeviceDetector from 'node-device-detector';
+import { ClientAppNotFoundError } from '../models/errors/ClientAppError';
+import ClientApp from '../models/ClientApp';
+import NotFoundError from '../models/errors/NotFoundError';
 
 export default class UserService {
   async createUser(
@@ -56,24 +56,24 @@ export default class UserService {
     } catch (error) {
       await transaction.rollback();
       console.debug(error);
-      throw new UserCreateError("Server was unable to process your request.");
+      throw new UserCreateError('Server was unable to process your request.');
     }
   }
 
   async findUserBy(query: any) {
     const user = await User.findOne({
       where: query,
-      include: [Developer, UserSecret],
+      include: [ParticipatingWebsite, UserSecret],
     });
     if (user === null) {
-      throw new NotFoundError("No record found");
+      throw new NotFoundError('No record found');
     }
     return user;
   }
 
   async updateUser(data: UserAttributes) {
     if ((await User.findByPk(data.id)) === null) {
-      throw new UserNotFoundError("No user found");
+      throw new UserNotFoundError('No user found');
     }
     const [affectedRows] = await User.update(
       {
@@ -113,7 +113,7 @@ export default class UserService {
 
   async deleteUser(id: string) {
     if ((await User.findByPk(id)) === null) {
-      throw new UserNotFoundError("No user found");
+      throw new UserNotFoundError('No user found');
     }
     const result = await User.destroy({ where: { id } });
 
@@ -125,7 +125,7 @@ export default class UserService {
 
     const devices = await UserDevice.findAll({
       where: { userId },
-      order: [["createdAt", "DESC"]],
+      order: [['createdAt', 'DESC']],
     });
     return devices.map((d) => {
       const data = detector.detect(d.userAgent);
@@ -140,7 +140,7 @@ export default class UserService {
     const apps = await UserApp.findAll({
       where: { userId },
       include: [ClientApp],
-      order: [["createdAt", "DESC"]],
+      order: [['createdAt', 'DESC']],
     });
     return apps.map((d) => d.toJSON());
   }
@@ -171,11 +171,11 @@ export default class UserService {
 
   async getPublicProfile(id: string) {
     const user = await User.findByPk(id, {
-      attributes: ["firstname", "lastname", "email"],
+      attributes: ['firstname', 'lastname', 'email'],
     });
 
     if (!user) {
-      throw new UserNotFoundError("No user found");
+      throw new UserNotFoundError('No user found');
     }
     return user;
   }
@@ -185,7 +185,7 @@ export default class UserService {
       where: query,
     });
     if (userSecret === null) {
-      throw new NotFoundError("No user found");
+      throw new NotFoundError('No user found');
     }
     return userSecret;
   }

@@ -1,4 +1,4 @@
-import { DataTypes, Optional } from "sequelize";
+import { DataTypes, Optional } from 'sequelize';
 import {
   Column,
   DataType,
@@ -7,9 +7,9 @@ import {
   IsUUID,
   PrimaryKey,
   HasOne,
-} from "sequelize-typescript";
-import UserSecret from "./UserSecret";
-import Developer from "./Developer";
+} from 'sequelize-typescript';
+import UserSecret from './UserSecret';
+import ParticipatingWebsite from './ParticipatingWebsite';
 
 export interface UserAttributes {
   id: string;
@@ -19,7 +19,7 @@ export interface UserAttributes {
   password: string;
   verified: boolean;
   secret: UserSecret;
-  developer?: Developer;
+  developer?: ParticipatingWebsite;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,7 +27,7 @@ export interface UserAttributes {
 export interface UserCreationAttributes
   extends Optional<
     UserAttributes,
-    "id" | "verified" | "secret" | "createdAt" | "updatedAt"
+    'id' | 'verified' | 'secret' | 'createdAt' | 'updatedAt'
   > {}
 
 @Table
@@ -58,6 +58,6 @@ export default class User extends Model<
   @HasOne(() => UserSecret)
   secret!: UserSecret;
 
-  @HasOne(() => Developer)
-  developer!: Developer;
+  @HasOne(() => ParticipatingWebsite)
+  developer!: ParticipatingWebsite;
 }

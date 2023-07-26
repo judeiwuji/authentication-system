@@ -1,9 +1,9 @@
-import Developer from "../models/Developer";
-import Session, { SessionCreationAttributes } from "../models/Session";
-import User from "../models/User";
-import UserSecret from "../models/UserSecret";
-import { SessionNotFoundError } from "../models/errors/SessionError";
-import Auth from "./Auth";
+import ParticipatingWebsite from '../models/ParticipatingWebsite';
+import Session, { SessionCreationAttributes } from '../models/Session';
+import User from '../models/User';
+import UserSecret from '../models/UserSecret';
+import { SessionNotFoundError } from '../models/errors/SessionError';
+import Auth from './Auth';
 
 export default class SessionAuth extends Auth {
   async createSession(data: SessionCreationAttributes) {
@@ -12,11 +12,11 @@ export default class SessionAuth extends Auth {
 
   async findUserBySession(sessionId: string) {
     const session = await Session.findByPk(sessionId, {
-      include: [{ model: User, include: [UserSecret, Developer] }],
+      include: [{ model: User, include: [UserSecret, ParticipatingWebsite] }],
     });
 
     if (!session) {
-      throw new SessionNotFoundError("Not found");
+      throw new SessionNotFoundError('Not found');
     }
     return session.user;
   }
@@ -27,7 +27,7 @@ export default class SessionAuth extends Auth {
     });
 
     if (!session) {
-      throw new SessionNotFoundError("Not found");
+      throw new SessionNotFoundError('Not found');
     }
 
     await session.destroy();

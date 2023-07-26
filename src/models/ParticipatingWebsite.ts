@@ -1,4 +1,4 @@
-import { DataTypes, Optional } from "sequelize";
+import { DataTypes, Optional } from 'sequelize';
 import {
   Column,
   DataType,
@@ -8,10 +8,10 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-} from "sequelize-typescript";
-import User from "./User";
+} from 'sequelize-typescript';
+import User from './User';
 
-export interface DeveloperAttributes {
+export interface ParticipatingWebsiteAttributes {
   id: string;
   company: string;
   role: string;
@@ -19,13 +19,13 @@ export interface DeveloperAttributes {
   user: User;
 }
 
-export interface DeveloperCreationAttributes
-  extends Optional<DeveloperAttributes, "id" | "user"> {}
+export interface ParticipatingWebsiteCreationAttributes
+  extends Optional<ParticipatingWebsiteAttributes, 'id' | 'user'> {}
 
 @Table
-export default class Developer extends Model<
-  DeveloperAttributes,
-  DeveloperCreationAttributes
+export default class ParticipatingWebsite extends Model<
+  ParticipatingWebsiteAttributes,
+  ParticipatingWebsiteCreationAttributes
 > {
   @IsUUID(4)
   @PrimaryKey

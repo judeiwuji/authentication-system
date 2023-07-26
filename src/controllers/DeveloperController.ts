@@ -10,7 +10,7 @@ import JWTUtil from '../utils/JWTUtil';
 import developerRoles from '../data/developerRoles';
 import IRequest from '../models/interfaces/IRequest';
 import ClientAppService from '../services/ClientAppService';
-import Developer from '../models/Developer';
+import ParticipatingWebsite from '../models/ParticipatingWebsite';
 import User from '../models/User';
 import AppConfig from '../config/appConfig';
 
@@ -24,7 +24,7 @@ export default class DeveloperController {
 
     const apps = await this.clientAppService.getApps(
       Number(page || 1),
-      req.user?.developer as Developer
+      req.user?.developer as ParticipatingWebsite
     );
     res.render('developer/dashboard', {
       page: {

@@ -1,15 +1,15 @@
-import { genSalt, hash } from "bcryptjs";
-import Developer, {
-  DeveloperAttributes,
-  DeveloperCreationAttributes,
-} from "../models/Developer";
-import User, { UserAttributes, UserCreationAttributes } from "../models/User";
-import DB from "../models/engine/DBStorage";
-import { DeveloperCreateError } from "../models/errors/Developer";
+import { genSalt, hash } from 'bcryptjs';
+import ParticipatingWebsite, {
+  ParticipatingWebsiteAttributes,
+  ParticipatingWebsiteCreationAttributes,
+} from '../models/ParticipatingWebsite';
+import User, { UserAttributes, UserCreationAttributes } from '../models/User';
+import DB from '../models/engine/DBStorage';
+import { DeveloperCreateError } from '../models/errors/Developer';
 
 export default class DeveloperService {
   async createDeveloper(
-    data: UserCreationAttributes & DeveloperCreationAttributes
+    data: UserCreationAttributes & ParticipatingWebsiteCreationAttributes
   ) {
     const transaction = await DB.transaction();
 
@@ -25,7 +25,7 @@ export default class DeveloperService {
         },
         { transaction }
       );
-      const developer = await Developer.create(
+      const developer = await ParticipatingWebsite.create(
         {
           company: data.company,
           role: data.role,
@@ -34,9 +34,9 @@ export default class DeveloperService {
         { transaction }
       );
       await transaction.commit();
-      return (await Developer.findByPk(developer.id, {
+      return (await ParticipatingWebsite.findByPk(developer.id, {
         include: [User],
-      })) as Developer;
+      })) as ParticipatingWebsite;
     } catch (error: any) {
       await transaction.rollback();
       throw new DeveloperCreateError(error.message);
@@ -44,7 +44,7 @@ export default class DeveloperService {
   }
 
   async updateDeveloper(
-    data: UserAttributes & DeveloperAttributes,
+    data: UserAttributes & ParticipatingWebsiteAttributes,
     user: User
   ) {
     const [userCount] = await User.update(
@@ -54,7 +54,7 @@ export default class DeveloperService {
       },
       { where: { id: user.id } }
     );
-    const [developerCount] = await Developer.update(
+    const [developerCount] = await ParticipatingWebsite.update(
       { company: data.company, role: data.role },
       { where: { userId: user.id } }
     );

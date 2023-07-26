@@ -7,10 +7,10 @@ import {
   Model,
   PrimaryKey,
   Table,
-} from "sequelize-typescript";
-import Developer from "./Developer";
-import crypto from "crypto";
-import { DataTypes, Optional } from "sequelize";
+} from 'sequelize-typescript';
+import ParticipatingWebsite from './ParticipatingWebsite';
+import crypto from 'crypto';
+import { DataTypes, Optional } from 'sequelize';
 
 export interface ClientAppAttributes {
   id: string;
@@ -18,11 +18,11 @@ export interface ClientAppAttributes {
   name: string;
   redirectURL: string;
   secret: string;
-  developer: Developer;
+  developer: ParticipatingWebsite;
 }
 
 export interface ClientAppCreationAttributes
-  extends Optional<ClientAppAttributes, "id" | "secret" | "developer"> {}
+  extends Optional<ClientAppAttributes, 'id' | 'secret' | 'developer'> {}
 
 @Table
 export default class ClientApp extends Model<
@@ -34,12 +34,12 @@ export default class ClientApp extends Model<
   @Column({ defaultValue: DataTypes.UUIDV4 })
   id!: string;
 
-  @ForeignKey(() => Developer)
+  @ForeignKey(() => ParticipatingWebsite)
   @Column
   developerId!: string;
 
-  @BelongsTo(() => Developer)
-  developer!: Developer;
+  @BelongsTo(() => ParticipatingWebsite)
+  developer!: ParticipatingWebsite;
 
   @Column(DataType.STRING(150))
   name!: string;
@@ -49,7 +49,7 @@ export default class ClientApp extends Model<
 
   @Column({
     type: DataType.STRING(36),
-    defaultValue: crypto.randomBytes(16).toString("hex"),
+    defaultValue: crypto.randomBytes(16).toString('hex'),
   })
   secret!: string;
 }

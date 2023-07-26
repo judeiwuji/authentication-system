@@ -6,7 +6,7 @@ import {
 } from '../validators/schemas/ClientAppSchema';
 import ClientAppService from '../services/ClientAppService';
 import IRequest from '../models/interfaces/IRequest';
-import Developer from '../models/Developer';
+import ParticipatingWebsite from '../models/ParticipatingWebsite';
 import ClientApp from '../models/ClientApp';
 import AppConfig from '../config/appConfig';
 
@@ -17,7 +17,7 @@ export default class ClientAppController {
       const data = await validateSchema(ClientAppCreationSchema, req.body);
       const app = await this.clientAppService.createApp(
         data,
-        req.user?.developer as Developer
+        req.user?.developer as ParticipatingWebsite
       );
       req.flash('info', 'App created');
       res.redirect(`/client/apps/${app.id}`);
@@ -32,7 +32,7 @@ export default class ClientAppController {
 
     const apps = await this.clientAppService.getApps(
       Number(page),
-      req.user?.developer as Developer
+      req.user?.developer as ParticipatingWebsite
     );
   }
 
@@ -93,7 +93,7 @@ export default class ClientAppController {
     try {
       await this.clientAppService.deleteApp(
         id,
-        req.user?.developer as Developer
+        req.user?.developer as ParticipatingWebsite
       );
       req.flash('info', 'App deleted');
       res.redirect(`/website/dashboard`);

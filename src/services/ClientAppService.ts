@@ -1,23 +1,26 @@
 import ClientApp, {
   ClientAppAttributes,
   ClientAppCreationAttributes,
-} from "../models/ClientApp";
-import Developer from "../models/Developer";
-import Pagination from "../models/Pagination";
+} from '../models/ClientApp';
+import ParticipatingWebsite from '../models/ParticipatingWebsite';
+import Pagination from '../models/Pagination';
 import {
   ClientAppAlreadyExistsError,
   ClientAppError,
   ClientAppNotFoundError,
-} from "../models/errors/ClientAppError";
-import NotFoundError from "../models/errors/NotFoundError";
+} from '../models/errors/ClientAppError';
+import NotFoundError from '../models/errors/NotFoundError';
 
 export default class ClientAppService {
-  async createApp(data: ClientAppCreationAttributes, developer: Developer) {
+  async createApp(
+    data: ClientAppCreationAttributes,
+    developer: ParticipatingWebsite
+  ) {
     try {
       const appExists = await ClientApp.findOne({ where: { name: data.name } });
 
       if (appExists) {
-        throw new ClientAppAlreadyExistsError("App already exists");
+        throw new ClientAppAlreadyExistsError('App already exists');
       }
 
       return ClientApp.create({
@@ -26,7 +29,7 @@ export default class ClientAppService {
         redirectURL: data.redirectURL,
       });
     } catch (error) {
-      throw new ClientAppError("Failed to create app");
+      throw new ClientAppError('Failed to create app');
     }
   }
 
@@ -40,7 +43,7 @@ export default class ClientAppService {
     return affectedCount > 0;
   }
 
-  async getApps(page = 1, developer: Developer) {
+  async getApps(page = 1, developer: ParticipatingWebsite) {
     const pager = new Pagination(page);
     const { rows, count } = await ClientApp.findAndCountAll({
       where: { developerId: developer.id },
@@ -61,12 +64,12 @@ export default class ClientAppService {
     });
 
     if (!app) {
-      throw new NotFoundError("App not found");
+      throw new NotFoundError('App not found');
     }
     return app;
   }
 
-  async deleteApp(id: string, developer: Developer) {
+  async deleteApp(id: string, developer: ParticipatingWebsite) {
     const app = await ClientApp.findOne({
       where: {
         id,
@@ -75,7 +78,7 @@ export default class ClientAppService {
     });
 
     if (!app) {
-      throw new ClientAppNotFoundError("App not found");
+      throw new ClientAppNotFoundError('App not found');
     }
     await app.destroy();
     return true;
